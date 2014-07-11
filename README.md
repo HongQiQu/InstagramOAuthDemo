@@ -11,17 +11,18 @@ This demo show two ways to get access token.
 
 
 
+
 Developed By
 ============
 
-* Jin Zhenguo - <jinzhenguo1990@gmail.com>
+* Zhenguo Jin - <jinzhenguo1990@gmail.com>
 
 
 
 License
 =======
 
-    Copyright 2012 Jin Zhenguo
+    Copyright 2014 Zhenguo Jin
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
