@@ -152,6 +152,7 @@ public class ExplicitApiActivity extends Activity {
 								Toast.makeText(getApplicationContext(),
 										"id : " + id + "\ntoken : " + tokenStr,
 										Toast.LENGTH_SHORT).show();
+								finish();
 							}
 						});
 					}
