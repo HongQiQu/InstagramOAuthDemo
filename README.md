@@ -1,7 +1,7 @@
 InstagramOAuthDemo
 ==================
 
-Instagram’s API uses the OAuth 2.0 protocol for simple, but effective authentication and authorization. OAuth 2.0 is much easier to use than previous schemes; developers can start using the Instagram API almost immediately. 
+Instagram's API uses the OAuth 2.0 protocol for simple, but effective authentication and authorization. OAuth 2.0 is much easier to use than previous schemes; developers can start using the Instagram API almost immediately. 
 
 The server will redirect the user in one of two ways that you choose:
 	1. Server-side flow (reccommended):
