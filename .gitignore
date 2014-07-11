@@ -56,3 +56,4 @@ $RECYCLE.BIN/
 
 bin/AndroidManifest.xml
 gen/com/worthed/R.java
+/assets
