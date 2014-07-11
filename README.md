@@ -14,14 +14,14 @@ This demo show two ways to get access token.
 Developed By
 ============
 
-* Jake Wharton - <jakewharton@gmail.com>
+* Jin Zhenguo - <jinzhenguo1990@gmail.com>
 
 
 
 License
 =======
 
-    Copyright 2012 Jake Wharton
+    Copyright 2012 Jin Zhenguo
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
