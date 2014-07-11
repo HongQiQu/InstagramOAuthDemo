@@ -17,9 +17,8 @@ public class Constants {
 	public static final String INSTAGRAM_OAUTH_IMPLICIT = INSTAGRAM_OAUTH
 			+ INSTAGRAM_OAUTH_TYPE_IMPLICIT;
 	public static final String INSTAGRAM_OAUTH_EXPLICIT = INSTAGRAM_OAUTH
-			+ INSTAGRAM_OAUTH_TYPE_EXPLICIT;
-	// &scope=basic+relationships+likes+comments
-
-	// https://api.instagram.com/v1/users/self/?access_token=1422018522.109a557.4307be6e5d3847be84084b992c86f5e4
+			+ INSTAGRAM_OAUTH_TYPE_EXPLICIT + "&scope=basic+relationships+likes+comments";
+	
+	public static final String INSTAGRAM_ACCESS_TOKEN_URL = "https://api.instagram.com/oauth/access_token";
 
 }

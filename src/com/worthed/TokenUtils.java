@@ -10,6 +10,7 @@ public class TokenUtils {
 	
 	private static String KEY_TOKEN = "access_token=";
 	private static String KEY_CODE = "code=";
+	private static String KEY_ERROR = "error_description=";
 	
 	public static String getToken(String url) {
 		return getParm(url, KEY_TOKEN);
@@ -17,6 +18,10 @@ public class TokenUtils {
 	
 	public static String getCode(String url) {
 		return getParm(url, KEY_CODE);
+	}
+	
+	public static String getError(String url) {
+		return getParm(url, KEY_ERROR);
 	}
 	
 	private static String getParm(String url, String key) {
