@@ -4,8 +4,10 @@ InstagramOAuthDemo
 Instagram’s API uses the OAuth 2.0 protocol for simple, but effective authentication and authorization. OAuth 2.0 is much easier to use than previous schemes; developers can start using the Instagram API almost immediately. 
 
 The server will redirect the user in one of two ways that you choose:
-Server-side flow (reccommended):Redirect the user to a URI of your choice. Take the provided code parameter and exchange it for an access_token by POSTing the code to our access_token url.
-Implicit flow: Instead of handling a code, we include the access_token as a fragment (#) in the URL. This method allows applications without any server component to receive an access_token with ease.
+	1. Server-side flow (reccommended):
+		Redirect the user to a URI of your choice. Take the provided code parameter and exchange it for an access_token by POSTing the code to our access_token url.
+	2. Implicit flow: 
+		Instead of handling a code, we include the access_token as a fragment (#) in the URL. This method allows applications without any server component to receive an access_token with ease.
 
 This demo show two ways to get access token.
 
