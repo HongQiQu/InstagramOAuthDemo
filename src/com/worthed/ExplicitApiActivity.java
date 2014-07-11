@@ -119,7 +119,7 @@ public class ExplicitApiActivity extends Activity {
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				// TODO Auto-generated method stub
-				handler.sendEmptyMessage(PROGRESS_HIDE);
+				// handler.sendEmptyMessage(PROGRESS_HIDE);
 				Log.d(TAG, "WebViewClient finish url : " + url);
 				super.onPageFinished(view, url);
 			}
@@ -155,13 +155,13 @@ public class ExplicitApiActivity extends Activity {
 	}
 
 	public void requestToken(final String code) {
-		Log.d(TAG, "requestToken()");
 		handler.sendEmptyMessage(PROGRESS_SHOW);
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				Log.d(TAG, "requestToken() thread start");
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("client_id",
 						Constants.INSTAGRAM_CLIENT_ID));
@@ -190,6 +190,7 @@ public class ExplicitApiActivity extends Activity {
 						Log.d(TAG, "id          : " + id);
 						Log.d(TAG, "username    : "
 								+ token.getUser().getUsername());
+						handler.sendEmptyMessage(PROGRESS_HIDE);
 						handler.post(new Runnable() {
 
 							@Override
@@ -200,7 +201,6 @@ public class ExplicitApiActivity extends Activity {
 											"id : " + id + "\ntoken : " + tokenStr,
 											Toast.LENGTH_SHORT).show();
 								}
-								handler.sendEmptyMessage(PROGRESS_HIDE);
 								finish();
 							}
 						});

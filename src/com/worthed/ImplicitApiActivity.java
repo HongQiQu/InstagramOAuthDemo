@@ -95,7 +95,7 @@ public class ImplicitApiActivity extends Activity {
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				// TODO Auto-generated method stub
-				handler.sendEmptyMessage(PROGRESS_HIDE);
+				// handler.sendEmptyMessage(PROGRESS_HIDE);
 				Log.d(TAG, "WebViewClient finish url : " + url);
 				super.onPageFinished(view, url);
 			}
