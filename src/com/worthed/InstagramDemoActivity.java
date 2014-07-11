@@ -3,19 +3,12 @@ package com.worthed;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.webkit.JsResult;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 public class InstagramDemoActivity extends Activity {
 
-	private final String TAG = InstagramDemoActivity.class.getSimpleName();
+	// private final String TAG = InstagramDemoActivity.class.getSimpleName();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

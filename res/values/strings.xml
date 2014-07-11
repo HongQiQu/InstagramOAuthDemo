@@ -7,4 +7,7 @@
 
     <string name="implicit_btn">Implicit</string>
     <string name="explicit_btn">Explicit</string>
+    
+    <string name="loding_title">Loading</string>
+    <string name="loding_content">Please wait ...</string>
 </resources>

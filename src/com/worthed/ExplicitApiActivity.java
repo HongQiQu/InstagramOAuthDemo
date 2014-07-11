@@ -1,7 +1,6 @@
 package com.worthed;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +21,13 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.JsResult;
@@ -41,15 +40,53 @@ import android.widget.Toast;
 public class ExplicitApiActivity extends Activity {
 	private final String TAG = ExplicitApiActivity.class.getSimpleName();
 
+	private final int PROGRESS_SHOW = 1001;
+	private final int PROGRESS_HIDE = 1002;
+
 	private WebView oauthWebView;
 	private Handler handler;
+	private ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.implicit_layout);
-		handler = new Handler();
+		init();
+		initWebView();
+	}
+
+	private void init() {
+		handler = new Handler() {
+
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				switch (msg.what) {
+				case PROGRESS_SHOW:
+					if (progressDialog != null && !progressDialog.isShowing()) {
+						progressDialog.show();
+					}
+					break;
+				case PROGRESS_HIDE:
+					if (progressDialog != null && progressDialog.isShowing()) {
+						progressDialog.dismiss();
+					}
+					break;
+
+				default:
+					break;
+				}
+				super.handleMessage(msg);
+			}
+
+		};
+		progressDialog = ProgressDialog.show(this,
+				getString(R.string.loding_title),
+				getString(R.string.loding_content), true, true);
+	}
+
+	private void initWebView() {
 		oauthWebView = (WebView) findViewById(R.id.oauth_instagram_webview);
 		oauthWebView.clearCache(true);
 		oauthWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -73,6 +110,7 @@ public class ExplicitApiActivity extends Activity {
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
 				// TODO Auto-generated method stub
+				handler.sendEmptyMessage(PROGRESS_SHOW);
 				Log.d(TAG, "WebViewClient start url : " + url);
 				handlerUrl(url);
 				super.onPageStarted(view, url, favicon);
@@ -81,6 +119,7 @@ public class ExplicitApiActivity extends Activity {
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				// TODO Auto-generated method stub
+				handler.sendEmptyMessage(PROGRESS_HIDE);
 				Log.d(TAG, "WebViewClient finish url : " + url);
 				super.onPageFinished(view, url);
 			}
@@ -113,6 +152,7 @@ public class ExplicitApiActivity extends Activity {
 
 	public void requestToken(final String code) {
 		Log.d(TAG, "requestToken()");
+		handler.sendEmptyMessage(PROGRESS_SHOW);
 		new Thread(new Runnable() {
 
 			@Override
@@ -130,12 +170,14 @@ public class ExplicitApiActivity extends Activity {
 				params.add(new BasicNameValuePair("code", code));
 
 				String responseStr = doPost(
-						Constants.INSTAGRAM_ACCESS_TOKEN_URL, params, getHttpClient());
+						Constants.INSTAGRAM_ACCESS_TOKEN_URL, params,
+						getHttpClient());
 
 				Gson gson = new Gson();
-				Type type = new TypeToken<InstagramToken>() {
-				}.getType();
-				InstagramToken token = gson.fromJson(responseStr, InstagramToken.class);
+				// Type type = new TypeToken<InstagramToken>() {
+				// }.getType();
+				InstagramToken token = gson.fromJson(responseStr,
+						InstagramToken.class);
 				if (token != null) {
 					final String tokenStr = token.getAccess_token();
 					Log.d(TAG, "accessToken : " + tokenStr);
@@ -152,6 +194,7 @@ public class ExplicitApiActivity extends Activity {
 								Toast.makeText(getApplicationContext(),
 										"id : " + id + "\ntoken : " + tokenStr,
 										Toast.LENGTH_SHORT).show();
+								handler.sendEmptyMessage(PROGRESS_HIDE);
 								finish();
 							}
 						});
@@ -161,7 +204,8 @@ public class ExplicitApiActivity extends Activity {
 		}).start();
 	}
 
-	public String doPost(String url, List<NameValuePair> params, HttpClient httpClient) {
+	public String doPost(String url, List<NameValuePair> params,
+			HttpClient httpClient) {
 		/* 建立HTTPPost对象 */
 		HttpPost httpRequest = new HttpPost(url);
 		String strResult = "doPostError";
@@ -215,6 +259,20 @@ public class ExplicitApiActivity extends Activity {
 		HttpClient httpClient = new DefaultHttpClient(httpParams);
 
 		return httpClient;
+	}
+
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		handler.sendEmptyMessage(PROGRESS_HIDE);
+		super.onBackPressed();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		handler.sendEmptyMessage(PROGRESS_HIDE);
+		super.onDestroy();
 	}
 
 }
