@@ -115,8 +115,10 @@ public class ImplicitApiActivity extends Activity {
 	private void handlerUrl(String url) {
 		String token = TokenUtils.getToken(url);
 		if (!TextUtils.isEmpty(token)) {
-			Toast.makeText(getApplicationContext(), "token : " + token,
-					Toast.LENGTH_SHORT).show();
+			if (ImplicitApiActivity.this != null) {
+				Toast.makeText(ImplicitApiActivity.this, "token : " + token,
+						Toast.LENGTH_SHORT).show();
+			}
 			Log.e(TAG, "token : " + token);
 			handler.sendEmptyMessage(PROGRESS_HIDE);
 			finish();

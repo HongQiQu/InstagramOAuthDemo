@@ -139,13 +139,17 @@ public class ExplicitApiActivity extends Activity {
 		String code = TokenUtils.getCode(url);
 		String error = TokenUtils.getError(url);
 		if (!TextUtils.isEmpty(code)) {
-			Toast.makeText(getApplicationContext(), "code : " + code,
-					Toast.LENGTH_SHORT).show();
+			if (ExplicitApiActivity.this != null) {
+				Toast.makeText(ExplicitApiActivity.this, "code : " + code,
+						Toast.LENGTH_SHORT).show();
+			}
 			Log.e(TAG, "code : " + code);
 			requestToken(code);
 		} else if (!TextUtils.isEmpty(error)) {
-			Toast.makeText(getApplicationContext(), "error : " + error,
-					Toast.LENGTH_SHORT).show();
+			if (ExplicitApiActivity.this != null) {
+				Toast.makeText(ExplicitApiActivity.this, "error : " + error,
+						Toast.LENGTH_SHORT).show();
+			}
 			Log.e(TAG, "error : " + error);
 		}
 	}
@@ -191,9 +195,11 @@ public class ExplicitApiActivity extends Activity {
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
-								Toast.makeText(getApplicationContext(),
-										"id : " + id + "\ntoken : " + tokenStr,
-										Toast.LENGTH_SHORT).show();
+								if (ExplicitApiActivity.this != null) {
+									Toast.makeText(ExplicitApiActivity.this,
+											"id : " + id + "\ntoken : " + tokenStr,
+											Toast.LENGTH_SHORT).show();
+								}
 								handler.sendEmptyMessage(PROGRESS_HIDE);
 								finish();
 							}
