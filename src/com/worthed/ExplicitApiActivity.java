@@ -177,6 +177,10 @@ public class ExplicitApiActivity extends Activity {
 						Constants.INSTAGRAM_ACCESS_TOKEN_URL, params,
 						getHttpClient());
 
+				if (TextUtils.isEmpty(responseStr)) {
+					return;
+				}
+				
 				Gson gson = new Gson();
 				// Type type = new TypeToken<InstagramToken>() {
 				// }.getType();
@@ -232,12 +236,15 @@ public class ExplicitApiActivity extends Activity {
 		} catch (ClientProtocolException e) {
 			strResult = e.getMessage().toString();
 			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			strResult = e.getMessage().toString();
 			e.printStackTrace();
+			return null;
 		} catch (Exception e) {
 			strResult = e.getMessage().toString();
 			e.printStackTrace();
+			return null;
 		}
 		Log.e(TAG, strResult);
 		return strResult;
